@@ -10,11 +10,13 @@ variable "domain" {
   default = "alexcaughey.uk"
 }
 
+# export TF_VAR_CLOUDFLARE_S3_ACCESS_KEY_ID = xxxx
 variable "CLOUDFLARE_S3_ACCESS_KEY_ID" {
   default = null
   type    = string
 }
 
+# export TF_VAR_CLOUDFLARE_S3_SECRET_ACCESS_KEY = xxxx
 variable "CLOUDFLARE_S3_SECRET_ACCESS_KEY" {
   default = null
   type    = string
