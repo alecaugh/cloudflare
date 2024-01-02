@@ -1,23 +1,19 @@
 terraform {
+  required_version = "1.6.6"
+
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
       version = "~> 4"
     }
   }
-}
 
-data "terraform_remote_state" "state" {
-  backend = "s3"
-
-  config = {
+  backend "s3" {
     bucket    = "terraform"
-    key       = "terraform/terraform.tfstate"
+    key       = "nextjs-blog/terraform.tfstate"
     endpoints = { s3 = "https://3de13909f2f3b972382054bcbe7f371a.r2.cloudflarestorage.com" }
     region    = "us-east-1"
 
-    access_key                  = "${var.CLOUDFLARE_S3_ACCESS_KEY_ID}"
-    secret_key                  = "${var.CLOUDFLARE_S3_SECRET_ACCESS_KEY}"
     skip_credentials_validation = true
     skip_region_validation      = true
     skip_requesting_account_id  = true
