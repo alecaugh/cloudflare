@@ -31,7 +31,7 @@ resource "cloudflare_record" "terraform_managed_resource_0b08a97974b4da68bcf1eac
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  value   = "nextjs-blog-27e.pages.dev"
+  value   = "nextjs-app-dfu.pages.dev"
   zone_id = var.zone_id
 }
 
@@ -74,9 +74,9 @@ resource "cloudflare_record" "terraform_managed_resource_60d17b84f28fe53bf8da7eb
   zone_id = var.zone_id
 }
 
-resource "cloudflare_pages_domain" "blog" {
+resource "cloudflare_pages_domain" "website" {
   account_id   = var.account_id
-  project_name = "nextjs-blog"
+  project_name = "nextjs-app"
   domain       = "alexcaughey.uk"
 }
 
@@ -127,3 +127,44 @@ resource "cloudflare_r2_bucket" "terraform" {
   name       = "terraform"
   location   = "WEUR"
 }
+
+/* resource "cloudflare_pages_project" "website" {
+  account_id        = var.account_id
+  name              = "nextjs-app"
+  production_branch = "main"
+
+  source {
+    type = "github"
+    config {
+      owner                         = "alecaugh"
+      repo_name                     = "cloudflare"
+      production_branch             = "main"
+      pr_comments_enabled           = true
+      deployments_enabled           = true
+      production_deployment_enabled = true
+      preview_deployment_setting    = "all"
+      preview_branch_includes       = ["*"]
+    }
+  }
+
+  build_config {
+    build_command   = "npx @cloudflare/next-on-pages@1"
+    destination_dir = ".vercel/output/static"
+    root_dir        = "nextjs-app"
+  }
+
+  deployment_configs {
+    preview {
+      compatibility_date  = "2023-12-27"
+      compatibility_flags = ["nodejs_compat"]
+      fail_open           = true
+      usage_model         = "standard"
+    }
+    production {
+      compatibility_date  = "2023-12-27"
+      compatibility_flags = ["nodejs_compat"]
+      fail_open           = true
+      usage_model         = "standard"
+    }
+  }
+} */
