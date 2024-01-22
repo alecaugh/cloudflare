@@ -74,12 +74,6 @@ resource "cloudflare_record" "terraform_managed_resource_60d17b84f28fe53bf8da7eb
   zone_id = var.zone_id
 }
 
-resource "cloudflare_pages_domain" "website" {
-  account_id   = var.account_id
-  project_name = "nextjs-app"
-  domain       = "alexcaughey.uk"
-}
-
 # Pages project managing all configs
 resource "cloudflare_pages_project" "blog" {
   account_id        = var.account_id
@@ -128,9 +122,15 @@ resource "cloudflare_r2_bucket" "terraform" {
   location   = "WEUR"
 }
 
-/* resource "cloudflare_pages_project" "website" {
+resource "cloudflare_pages_domain" "website" {
+  account_id   = var.account_id
+  project_name = "cloudflare"
+  domain       = "alexcaughey.uk"
+}
+
+resource "cloudflare_pages_project" "website" {
   account_id        = var.account_id
-  name              = "nextjs-app"
+  name              = "cloudflare"
   production_branch = "main"
 
   source {
@@ -155,16 +155,16 @@ resource "cloudflare_r2_bucket" "terraform" {
 
   deployment_configs {
     preview {
-      compatibility_date  = "2023-12-27"
+      compatibility_date  = "2024-01-22"
       compatibility_flags = ["nodejs_compat"]
       fail_open           = true
       usage_model         = "standard"
     }
     production {
-      compatibility_date  = "2023-12-27"
+      compatibility_date  = "2024-01-22"
       compatibility_flags = ["nodejs_compat"]
       fail_open           = true
       usage_model         = "standard"
     }
   }
-} */
+}
