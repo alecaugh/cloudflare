@@ -31,7 +31,7 @@ resource "cloudflare_record" "terraform_managed_resource_0b08a97974b4da68bcf1eac
   proxied = true
   ttl     = 1
   type    = "CNAME"
-  value   = "nextjs-app-dfu.pages.dev"
+  value   = "cloudflare-dyw.pages.dev"
   zone_id = var.zone_id
 }
 
